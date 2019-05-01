@@ -1,0 +1,152 @@
+query offers($categoryId: ID, $storeIds: [ID], $pagingInfo: InputBatch!, $pageSlug: String!, $random: Boolean!) {
+  offersSplited(categoryId: $categoryId, storeIds: $storeIds, pagingInfo: $pagingInfo, pageSlug: $pageSlug, random: $random) {
+    promos {
+      count
+      items {
+        ... on Promo {
+          ...PromoFragment
+          __typename
+        }
+        __typename
+      }
+      __typename
+    }
+    products {
+      count
+      items {
+        ... on Product {
+          ...OptimizedProductsFragment
+          __typename
+        }
+        __typename
+      }
+      __typename
+    }
+    coupons {
+      count
+      items {
+        ... on Coupon {
+          ...OptimizedCouponsFragment
+          addresses {
+            store {
+              id
+              __typename
+            }
+            __typename
+          }
+          __typename
+        }
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+}
+
+fragment PromoFragment on Promo {
+  id
+  title
+  description
+  position
+  image {
+    url
+    __typename
+  }
+  appearance {
+    ...AppearanceBaseFragment
+    __typename
+  }
+  type
+  promotion {
+    slug
+    title
+    __typename
+  }
+  campaign {
+    slug
+    title
+    __typename
+  }
+  link
+  video
+  displayType
+  imageSmall {
+    url
+    __typename
+  }
+  imageMiddle {
+    url
+    __typename
+  }
+  imageFull {
+    url
+    __typename
+  }
+  __typename
+}
+
+fragment AppearanceBaseFragment on Appearance {
+  size
+  color
+  __typename
+}
+
+fragment OptimizedProductsFragment on Product {
+  id
+  slug
+  type
+  title
+  weight
+  image {
+    url
+    __typename
+  }
+  price
+  oldPrice
+  discount
+  points
+  pointsText
+  appearance {
+    size
+    color
+    __typename
+  }
+  promotion {
+    id
+    slug
+    labelIcon {
+      url
+      __typename
+    }
+    labelIconReversed {
+      url
+      __typename
+    }
+    __typename
+  }
+  activePeriod {
+    start
+    end
+    __typename
+  }
+  __typename
+}
+
+fragment OptimizedCouponsFragment on Coupon {
+  id
+  useType
+  startedAt
+  endAt
+  isChangeable
+  isCouponControl
+  listImages
+  signText
+  rewardValue
+  unitText
+  couponDescription
+  promoDescription
+  limitDescription
+  isOff
+  __typename
+}
