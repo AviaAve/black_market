@@ -35,6 +35,9 @@ $atbParser->setSiteCode($connectionType);
 
 $controller->productProcessing($silpoParser);
 $controller->productProcessing($atbParser);
+
+$silpoParser->setStoreCode($connectionType);
+$silpoParser->setStoreList();
 //echo "<pre>";
 //print_r($controller->getAllProduct());
 //echo "</pre>";

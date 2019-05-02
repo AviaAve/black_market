@@ -15,6 +15,8 @@ class ParseSilpo implements AbstractParser
     private $url;
     private $productsData;
     private $siteCode;
+    private $storesCode;
+    private $storeList;
 
     public function __construct()
     {
@@ -28,6 +30,14 @@ class ParseSilpo implements AbstractParser
         $connectionType->setRequestParameters(silpoRequestParameters, silpoHeaders);
         $connectionType->connection();
         $this->siteCode = $connectionType->getSiteCode();
+    }
+
+    public function setStoreCode(AbstractConnectionType $connectionType)
+    {
+        $connectionType->setSiteUrl(silpoUrl);
+        $connectionType->setRequestParameters(silpoRequestShopParameters, silpoStoresHeaders);
+        $connectionType->connection();
+        $this->storesCode = $connectionType->getSiteCode();
     }
 
     public function getDeliveryNetworkName()
@@ -49,6 +59,22 @@ class ParseSilpo implements AbstractParser
                 'start' => $product['activePeriod']->start,
                 'end' => $product['activePeriod']->end
             ];
+        }
+    }
+
+    public function setStoreList()
+    {
+        foreach(json_decode($this->storesCode)->data->stores->items as $store)
+        {
+            if ($store->city->title == silpoCityName)
+            {
+                $this->storeList[] = [
+                    'city' => silpoCityName,
+                    'address' => $store->title,
+                    'lat' => $store->location->lat,
+                    'lng' => $store->location->lng
+                ];
+            }
         }
     }
 

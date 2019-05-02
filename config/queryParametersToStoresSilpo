@@ -1,0 +1,63 @@
+query storesPage($filter: StoreFilterInputType, $pagingInfo: InputBatch!) {
+  stores(filter: $filter, pagingInfo: $pagingInfo) {
+    limit
+    offset
+    count
+    items {
+      ...StoresPageFragment
+      __typename
+    }
+    __typename
+  }
+}
+
+fragment StoresPageFragment on Store {
+  id
+  title
+  premium
+  slug
+  city {
+    ...CityBaseFragment
+    __typename
+  }
+  workingHours {
+    start
+    end
+    __typename
+  }
+  location {
+    ...LocationBaseFragment
+    __typename
+  }
+  services {
+    enabled
+    service {
+      ...StoreServiceBaseFragment
+      __typename
+    }
+    __typename
+  }
+  __typename
+}
+
+fragment CityBaseFragment on City {
+  id
+  title
+  __typename
+}
+
+fragment LocationBaseFragment on Location {
+  lat
+  lng
+  __typename
+}
+
+fragment StoreServiceBaseFragment on StoreService {
+  id
+  title
+  icon {
+    url
+    __typename
+  }
+  __typename
+}
