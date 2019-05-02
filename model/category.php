@@ -18,14 +18,8 @@ class category
 
     public function getCategories() {
         $query = "SELECT * FROM category RIGHT JOIN category_keywords ON (category.category_id = category_keywords.category_id);";
-        echo "<pre>";
-        print_r($query);
-        echo "</pre>";
-        $test = $this->db->query($query);
-        echo "<pre>";
-        print_r("fuck 5");
-        echo "</pre>";
-        return $test;
+
+        return $this->db->query($query);
     }
 
     public function getCategoryByID($id)

@@ -51,9 +51,7 @@ class ParseATB implements AbstractParser
     public function parseProductsFromCode()
     {
         $this->convertHtmlToDom();
-//echo "<pre>";
-//print_r(count($this->domObject->find('#cat0 li') ));
-//echo "</pre>";
+
         foreach ($this->domObject->find('#cat0 li') as $product)
         {
             $product = pq($product);

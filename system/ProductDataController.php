@@ -28,9 +28,6 @@ class ProductDataController
 
         $this->category = new CategoryDataController();
         $this->setCategoryList();
-        echo "<pre>";
-        print_r("fuck 3");
-        echo "</pre>";
     }
     public function modelInit(AbstractDbConnection $dbConnection)
     {
@@ -75,21 +72,16 @@ class ProductDataController
     {
         $categories = [];
         foreach ($this->categoryList as $category){
-//echo "<pre>";
-//print_r($category);
-//echo "</pre>";
             foreach (explode(', ', $category['keywords']) as $word){
-                if (stristr($name, $word))
-                    $categories[] = $category['category_id'];
+                if (stristr($name, $word)) {
+                    $categories[$category['category_id']] = $category['category_id'];
+                }
             }
         }
 
-        if ($categories) {
-            echo "<pre>";
-            print_r($categories);
-            echo "</pre>";
-        }
+        return $categories;
     }
+
     private function addCategoryToProduct($product)
     {
         $product['categories'] = $this->findCategoryByKeywords($product['title']);

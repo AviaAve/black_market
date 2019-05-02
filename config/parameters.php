@@ -35,5 +35,5 @@ define("atbHeaders", [
 
 define("mySqlDbName", "BLACK_MARKET");
 define("mySqlUser", "root");
-define("mySqlPassword", "1");
+define("mySqlPassword", "11");
 define("mySqlHost", "localhost");

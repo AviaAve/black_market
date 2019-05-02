@@ -37,29 +37,17 @@ class ParseSilpo implements AbstractParser
 
     public function parseProductsFromCode()
     {
-        foreach( (array)json_decode($this->siteCode)->data->offersSplited->products->items as $poduct)
+        foreach( (array)json_decode($this->siteCode)->data->offersSplited->products->items as $product)
         {
-
-            $poduct = (array)$poduct;
-//            echo "<pre>";
-//            print_r([
-//                'title' => $poduct['title'],
-//                'weight' => $poduct['weight'],
-//                'price' => $poduct['price'],
-//                'old_price' => $poduct['oldPrice'],
-//                'img' => $poduct['image']->url,
-//                'start' => $poduct['activePeriod']->start,
-//                'end' => $poduct['activePeriod']->end
-//            ]);
-//            echo "</pre>";
+            $product = (array)$product;
             $this->productsData[] = [
-                'title' => $poduct['title'],
-                'weight' => $poduct['weight'],
-                'price' => $poduct['price'],
-                'old_price' => $poduct['oldPrice'],
-                'img' => $poduct['image']->url,
-                'start' => $poduct['activePeriod']->start,
-                'end' => $poduct['activePeriod']->end
+                'title' => $product['title'],
+                'weight' => $product['weight'],
+                'price' => $product['price'],
+                'old_price' => $product['oldPrice'],
+                'img' => $product['image']->url,
+                'start' => $product['activePeriod']->start,
+                'end' => $product['activePeriod']->end
             ];
         }
     }

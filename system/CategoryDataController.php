@@ -15,9 +15,6 @@ class CategoryDataController
     }
     public function getCategories()
     {
-        echo "<pre>";
-        print_r("fuck 4");
-        echo "</pre>";
         return $this->model->getCategories();
     }
 

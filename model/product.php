@@ -21,16 +21,19 @@ class ProductModel
         $this->db->query($query);
 
         $query = "SELECT MAX(`product_id`) FROM `product`;";
-        $lastId = $this->db->query($query);
+        $lastId = $this->db->query($query)[0]['MAX(`product_id`)'];
 
-        if (!isset($product['categories']) || $product['categories'] != []){
+        if (!isset($product['categories']) || !$product['categories']){
             return;
         }
-        $query = "INSERT INTO `product_to_category` (`product_id`, `category_id`) VALUES;";
+
+        $query = "INSERT INTO `product_to_category` (`product_id`, `category_id`) VALUES ";
+
         foreach ($product['categories'] as $category_id){
             $query .= "(". $category_id . ", " . $lastId . ")";
         }
-        $query = str_replace(')(', "), )", $query);
+
+        $query = str_replace(')(', "), (", $query);
         $this->db->query($query);
     }
 
