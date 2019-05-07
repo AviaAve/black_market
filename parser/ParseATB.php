@@ -14,6 +14,9 @@ class ParseATB implements AbstractParser
     private $productsData;
     private $siteCode;
     private $domObject;
+    private $storesCode;
+    private $storeList;
+    private $cityId;
 
     public function __construct()
     {
@@ -76,5 +79,41 @@ class ParseATB implements AbstractParser
     public function getProductsData()
     {
         return $this->productsData;
+    }
+
+    public function setStoreCode(AbstractConnectionType $connectionType)
+    {
+        $connectionType->setSiteUrl(AtbCityListUrl);
+        $connectionType->setRequestParameters();
+        $connectionType->connection();
+        $this->storesCode = $connectionType->getSiteCode();
+    }
+
+    private function setCityId() {
+        foreach (json_decode($this->storesCode)->cities as $cityId => $cityDescription) {
+            if ($cityDescription->title == atbCityName)
+                $this->cityId = $cityId;
+        }
+    }
+
+    public function setStoreList()
+    {
+        $this->setCityId();
+
+        foreach(json_decode($this->storesCode)->shops as $cityId => $storesInCity)
+        {
+            if ($cityId == $this->cityId) {
+                foreach ($storesInCity as $store) {
+                    $this->storeList[] = [
+                        'city' => silpoCityName,
+                        'address' => $store->address,
+                        'lat' => $store->latitude,
+                        'lng' => $store->longitude
+                    ];
+                }
+            }
+        }
+
+        return $this->storeList;
     }
 }

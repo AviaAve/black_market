@@ -76,6 +76,8 @@ class ParseSilpo implements AbstractParser
                 ];
             }
         }
+
+        return $this->storeList;
     }
 
     public function getProductsData()

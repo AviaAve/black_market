@@ -57,7 +57,8 @@ define("atbHeaders", [
 ]);
 
 define("silpoCityName", "м. Луцьк");
-
+define("atbCityName", "Луцьк");
+define("AtbCityListUrl", "https://www.atbmarket.com/map/get-region?id=22");
 
 define("mySqlDbName", "BLACK_MARKET");
 define("mySqlUser", "root");

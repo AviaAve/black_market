@@ -41,4 +41,12 @@ class ProductModel
         $query = "SELECT * FROM product;";
         return $this->db->query($query);
     }
+
+    public function delete() {
+        $sql = "DELETE FROM product;";
+        $this->db->query($sql);
+
+        $sql = "DELETE FROM product_to_category;";
+        $this->db->query($sql);
+    }
 }

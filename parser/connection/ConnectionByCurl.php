@@ -22,7 +22,7 @@ class ConnectionByCurl implements AbstractConnectionType
         $this->url = $url;
     }
 
-    public function setRequestParameters($parameters, $headers) {
+    public function setRequestParameters($parameters = [], $headers = []){
         $this->requestParameters = $parameters;
         $this->headers = $headers;
     }

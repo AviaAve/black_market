@@ -29,6 +29,7 @@ class ProductDataController
         $this->category = new CategoryDataController();
         $this->setCategoryList();
     }
+
     public function modelInit(AbstractDbConnection $dbConnection)
     {
         $this->productModel = new ProductModel();
@@ -58,6 +59,10 @@ class ProductDataController
     {
         $product = $this->addCategoryToProduct($product);
         $this->productModel->addProduct($product);
+    }
+
+    public function delete() {
+        $this->productModel->delete();
     }
 
     /**
