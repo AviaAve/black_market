@@ -16,8 +16,8 @@ class ProductModel
         $this->db = $dbConnection;
     }
 
-    public function addProduct($product) {
-        $query = "INSERT INTO product (`title`, `weight`, `price`, `old_price`, `img`, `start`, `end`) VALUES ('" . mb_convert_encoding(trim( addslashes( $product['title'] ) ), "UTF-8") . "', '" . addslashes($product['weight']) . "' ," . $product['price'] . "," . $product['old_price'] . ",'" . addslashes($product['img']) . "', '" . date("Y-m-d H:i:s", strtotime($product['start'])) . "', '" . date("Y-m-d H:i:s", strtotime($product['end'])) . "')";
+    public function addProduct($product, $deliveryNetworkId) {
+        $query = "INSERT INTO product (`title`, `weight`, `price`, `old_price`, `img`, `start`, `end`, `delivery_network_id`) VALUES ('" . mb_convert_encoding(trim( addslashes( $product['title'] ) ), "UTF-8") . "', '" . addslashes($product['weight']) . "' ," . $product['price'] . "," . $product['old_price'] . ",'" . addslashes($product['img']) . "', '" . date("Y-m-d H:i:s", strtotime($product['start'])) . "', '" . date("Y-m-d H:i:s", strtotime($product['end'])) . "', " . $deliveryNetworkId . ")";
         $this->db->query($query);
 
         $query = "SELECT MAX(`product_id`) FROM `product`;";
@@ -38,7 +38,7 @@ class ProductModel
     }
 
     public function getAllProduct() {
-        $query = "SELECT * FROM product;";
+        $query = "SELECT * FROM product p LEFT JOIN product_to_category pc ON(p.product_id = pc.product_id);";
         return $this->db->query($query);
     }
 
@@ -48,5 +48,17 @@ class ProductModel
 
         $sql = "DELETE FROM product_to_category;";
         $this->db->query($sql);
+    }
+
+    public function getDeliveryNetworks() {
+        $sql  = "SELECT * FROM delivery_network;";
+        $networkFromDb = $this->db->query($sql);
+        $deliveryNetworks = [];
+
+        foreach ($networkFromDb as $network) {
+            $deliveryNetworks[ $network['delivery_network_id'] ] = $network;
+        }
+
+        return $deliveryNetworks;
     }
 }

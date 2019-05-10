@@ -38,4 +38,15 @@ class StoreDataController
                 $this->deliveryNetworkId = $network['delivery_network_id'];
         }
     }
+
+    public function getDeliveryNetworks() {
+        $deliveryNetworks = [];
+
+        foreach ($this->storeModel->getDeliveryNetworksRight() as $deliveryNetwork) {
+            $deliveryNetworks[$deliveryNetwork['delivery_network_id']]['name'] = $deliveryNetwork['name'];
+            $deliveryNetworks[$deliveryNetwork['delivery_network_id']]['stores'][] = $deliveryNetwork;
+        }
+
+        return $deliveryNetworks;
+    }
 }

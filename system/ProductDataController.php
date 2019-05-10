@@ -22,6 +22,8 @@ class ProductDataController
     protected $shops;
     protected $category;
     protected $categoryList;
+    protected $deliveryNetworkId;
+    protected $deliveryNetworkName;
 
     public function __construct()
     {
@@ -36,8 +38,13 @@ class ProductDataController
         $this->productModel->setConnection($dbConnection);
     }
 
-    public function productProcessing(AbstractParser $parser)
+    protected function setDeliveryNetworkName($deliveryNetworkName) {
+        $this->deliveryNetworkName = $deliveryNetworkName;
+    }
+
+    public function productProcessing(AbstractParser $parser, $deliveryNetworkName)
     {
+        $this->setDeliveryNetworkName($deliveryNetworkName);
         $parser->parseProductsFromCode();
         $this->productDistribution($parser->getProductsData());
     }
@@ -57,8 +64,9 @@ class ProductDataController
 
     protected function addProduct($product)
     {
+        $this->setDeliveryNetworkId();
         $product = $this->addCategoryToProduct($product);
-        $this->productModel->addProduct($product);
+        $this->productModel->addProduct($product, $this->deliveryNetworkId);
     }
 
     public function delete() {
@@ -92,6 +100,13 @@ class ProductDataController
         $product['categories'] = $this->findCategoryByKeywords($product['title']);
 
         return $product;
+    }
+
+    public function setDeliveryNetworkId() {
+        foreach ($this->productModel->getDeliveryNetworks() as $network) {
+            if ($network['name'] == $this->deliveryNetworkName)
+                $this->deliveryNetworkId = $network['delivery_network_id'];
+        }
     }
 
 }

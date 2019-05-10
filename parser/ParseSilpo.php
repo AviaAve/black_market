@@ -47,7 +47,7 @@ class ParseSilpo implements AbstractParser
 
     public function parseProductsFromCode()
     {
-        foreach( (array)json_decode($this->siteCode)->data->offersSplited->products->items as $product)
+        foreach( json_decode($this->siteCode)->data->offersSplited->products->items as $product)
         {
             $product = (array)$product;
             $this->productsData[] = [
@@ -60,6 +60,8 @@ class ParseSilpo implements AbstractParser
                 'end' => $product['activePeriod']->end
             ];
         }
+
+        return $this->productsData;
     }
 
     public function setStoreList()

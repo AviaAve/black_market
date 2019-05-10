@@ -15,7 +15,7 @@ class storeModel
     }
 
     public function getDeliveryNetworks() {
-        $sql  = "SELECT * FROM delivery_network;";
+        $sql  = "SELECT * FROM delivery_network dn LEFT JOIN shop s  ON (dn.delivery_network_id = s.delivery_network_id);";
         $networkFromDb = $this->db->query($sql);
         $deliveryNetworks = [];
 
@@ -24,6 +24,11 @@ class storeModel
         }
 
         return $deliveryNetworks;
+    }
+
+    public function getDeliveryNetworksRight() {
+        $sql  = "SELECT * FROM shop dn LEFT JOIN delivery_network s  ON (dn.delivery_network_id = s.delivery_network_id);";
+        return $this->db->query($sql);
     }
 
     public function delete() {

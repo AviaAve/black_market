@@ -12,21 +12,29 @@ require_once "system/ProductDataController.php";
 require_once "model/connection/MySqlConnection.php";
 require_once "system/StoreDataController.php";
 
+$connectionType = new ConnectionByCurl();
+
 $dbConnection = new MySqlConnection();
 $dbConnection->setConnectionParameters(mySqlHost, mySqlDbName, mySqlUser, mySqlPassword);
+
 $productController = new ProductDataController();
 $productController->modelInit($dbConnection);
+$productController->delete();
+
 $storeController = new StoreDataController();
 $storeController->modelInit($dbConnection);
-$categoryController = new CategoryDataController();
+$storeController->delete();
 
-$data = [
-    'products' => $productController->getAllProduct(),
-    'categories' => $categoryController->getCategories(),
-    'delivery_networks' => $storeController->getDeliveryNetworks()
-];
+$silpoParser = new ParseSilpo();
+$silpoParser->setSiteCode($connectionType);
+$silpoParser->setStoreCode($connectionType);
 
-echo "<pre>";
-print_r($data);
-echo "</pre>";
+$atbParser = new ParseATB();
+$atbParser->setSiteCode($connectionType);
+$atbParser->setStoreCode($connectionType);
 
+$productController->productProcessing($silpoParser, silpoName);
+$productController->productProcessing($atbParser, atbName);
+
+$storeController->add( $silpoParser->setStoreList(), silpoName );
+$storeController->add( $atbParser->setStoreList(), atbName );
