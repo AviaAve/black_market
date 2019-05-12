@@ -1,0 +1,122 @@
+body{
+	background: url(img/background-site.jpg);
+}
+
+li {
+	list-style-type: none; /* Убираем маркеры */
+}
+
+ul {
+	padding: 0px;
+}
+
+.main-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+}
+
+.items li{
+	color: white;
+	font-size: 15px;
+	font-weight: bold;
+	padding: 2ex;
+	padding-left: 5ex;
+	margin: 1ex;
+	background-image: url(img/button.png);
+	background-repeat: round;
+	background-size: cover;
+}
+
+header, nav, main, footer {
+	width: 90%;
+}
+
+header {
+	background: green;
+}
+
+nav {
+	background: #FFC890;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+nav ul {
+	display: flex;
+	justify-content: space-between;
+	margin: 0px;
+}
+
+nav ul li {
+	margin: 1ex;
+	margin-right: 3ex;
+	padding: 3ex;
+	padding-right: 3em;
+	padding-left:  3em;
+	padding-bottom: 2ex;
+	color: white;
+	font-weight: bold;
+	font-size: 17px;
+	background-image: url(img/item.png);
+	background-repeat: round;
+	background-size: auto;
+	text-align: center;
+	align-items: center;
+}
+
+
+main {
+	display: flex;
+	flex-direction: row;
+}
+
+.product-type-column, .sub-category-column {
+	display: flex;
+	justify-content: flex-start;
+	flex-direction: column;
+	text-align: center;
+	align-items: center;
+	width: 15%;
+	height: 500px;
+}
+
+.sub-category-column {	
+	background: green;
+}
+
+.product-type-column {
+	background: lightgreen;
+}
+
+
+
+.map-container {
+	width: 70%;
+	background: lightgrey;
+	height: 500px;
+	display: flex;
+	flex-direction: column;
+}
+
+.choose-content-container {
+	display: flex;
+	flex-direction: row;
+}
+
+.choose-content-container>div {
+	width: 50%;
+	height: 50px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+footer {
+	height: 50px;
+	background: grey;
+}
