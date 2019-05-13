@@ -1,11 +1,13 @@
 body {
-background:url(img/background-site.jpg);
+background:url(img/background-site.jpg)
+}
+
+.container {
+width:90%;
+margin:0 auto;
 display:flex;
 flex-direction:column;
-align-items:center;
-width:100%;
-margin:0;
-padding:0
+align-items:center
 }
 
 li {
@@ -107,6 +109,9 @@ align-items:center
 }
 
 footer {
-height:50px;
-background:grey
+padding:2px;
+font-size:80%;
+background:grey;
+color:#fff;
+text-align:center
 }
