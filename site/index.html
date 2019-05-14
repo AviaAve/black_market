@@ -4,50 +4,77 @@
 	<meta charset="utf-8">
 	<title>Акції Знижки Луцьк</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+	<script>
+		var data;
+  		$.ajax ({
+  			url: "http://black-market.kl.com.ua/", dataType: "json", success : (result) => {
+  				data = result;
+  				console.log(data);
+ 			}
+  		})
+  	</script>
+	<script src="functions.js"></script>
 </head>
-<body>
+<body onload="get_categories()">
 	<div class="container">
 		<header>header</header>
 		<menu>
 			<div class="category">
-				<ul>
-					<li>Промислові</li>
-					<li>Харчові</li>
-				</ul>
+				<button onclick="fun_open('1')">Промислові</button>
+				<button onclick="fun_open('2')">Харчові</button>
+				<button onclick="fun_open('vargue')">Інші</button>				
 			</div>
 		</menu>
 		<main>
-			<div class="sub-category" id="1">
-				<ul class="items">
-					<li>Текстильні</li>
-					<li>Побутові дрібниці</li>					
-				</ul>
-			</div>
-			<div class="sub-category" id="2">
-				<ul class="items">
-					<li>Морепродукти</li>
-					<li>Салат</li>
-					<li>Овочі</li>
-					<li>Сухофрукти</li>
-					<li>Фрукти</li>
-					<li>Вироби макаронні</li>					
-				</ul>
-			</div>
-			<div class="sub-category" id="3">
-				<ul class="items">
-					<li>Ікра</li>
-				</ul>
-			</div>
-			<div class="sub-category" id="5">
-				<ul class="items">
-					<li>Предмети гігієни</li>				
-				</ul>
-			</div>
-			<div class="sub-category" id="5">
-				<ul class="items">
-					<li>Предмети гігієни</li>				
-				</ul>
-			</div>
+			<aside>
+				<div class="sub-category" id="vargue">
+					<span class="sub-category-name">Інші</span>
+					<button>Інші</button>
+				</div>
+				<div class="sub-category" id="1">
+					<span class="sub-category-name">Промислові</span>
+					<button onclick="fun_open('5')">Текстильні вироби</button>
+					<button onclick="fun_open('19')">Побутові дрібниці</button>
+				</div>
+				<div class="sub-category" id="2">
+					<span class="sub-category-name">Харчові</span>
+					<button onclick="fun_open('3')">Морепродукти</button>
+					<button>Салат</button>
+					<button>Овочі</button>
+					<button onclick="fun_open('12')">Сухофрукти</button>
+				</div>
+				<div class="sub-category" id="3">
+					<span class="sub-category-name" onclick="fun_open('2')">Морепродукти</span>
+					<button>Ікра</button>
+				</div>
+				<div class="sub-category" id="5">
+					<span class="sub-category-name" onclick="fun_open('1')">Текстильні вироби</span>
+					<button onclick="fun_open('6')">Одяг, взуття та аксесуари</button>
+					<button onclick="fun_open('7')">Предмети гігієни</button>
+				</div>
+				<div class="sub-category" id="6">
+					<span class="sub-category-name" onclick="fun_open('5')">Одяг, взуття та аксесуари</span>
+					<button onclick="fun_open('16')">Сумки</button>
+				</div>
+				<div class="sub-category" id="7">
+					<span class="sub-category-name" onclick="fun_open('5')">Предмети гігієни</span>
+					<button>Рушник</button>
+				</div>
+				<div class="sub-category" id="12">
+					<span class="sub-category-name" onclick="fun_open('2')">Сухофрукти</span>
+					<button>Курага</button>
+					<button>Kluth</button>
+				</div>
+				<div class="sub-category" id="16">
+					<span class="sub-category-name" onclick="fun_open('6')">Сумки</span>
+					<button>Барсетка</button>
+				</div>
+				<div class="sub-category" id="19">
+					<span class="sub-category-name" onclick="fun_open('1')">Побутові дрібниці</span>
+					<button>Кілочки для скатертини</button>
+				</div>
+			</aside>
 			<div class="map-container">
 				<div class="choose-content-container">
 					<div class="choose-map active">
@@ -65,7 +92,4 @@
 		<footer>© Влад Жумік, Андрій Дзей, Євген Погорєлов, Андрій Понепаляк 2019</footer>
 	</div>
 </body>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-	<script type="text/javascript" src="index.js"></script>
-	<script type="text/javascript" src="fetch.js"></script>
 </html>
