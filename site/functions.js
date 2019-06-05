@@ -1,30 +1,23 @@
-/*function get_categories() {
-	var vagues = [];
-	for (var i=0;i<data.categories.length;++i){
-		if (data.categories[i].parent_id == null && data.categories[i].parent_id != "1" && data.categories[i].parent_id != "2") {
-			vagues.push(data.categories[i]);
-			continue;
-		}
+var data;
+  		$.ajax ({
+  			url: "http://black-market.kl.com.ua/", dataType: "json", success : (result) => {
+  				data = result;
+  				/*console.log(data);*/
+  				get_categories();
+ 			}
+  		})
 
-		if (data.categories[i].parent_id == null)
-			continue;
-
-		var bFoundParent = false;
-		for (var j=0;j<data.categories.length;++j)
-			if (data.categories[i].parent_id == data.categories[j].category_id){
-				bFoundParent = true;
-				break;
-			}
-
-		if (bFoundParent == false)
-			vagues.push(data.categories[i]);
-	}
-	return vagues;
-}*/
+function get_categories() {
+	let cat = '';
+	data.categories.map((category) => {
+		cat += '<button onclick="fun_open('+category.category_id+')">'+category.name+'</button>';
+	})
+	document.querySelector("#sub-category").innerHTML = cat;
+}
 
 function fun_open(category_id)
 {
-	var others = document.getElementsByClassName('sub-category');
+	/*var others = document.getElementsByClassName('sub-category');
 	for (var i=0;i<others.length;++i){
 		var other = others[i].getElementsByTagName('button');
 		for(var j=0;j<other.length;++j)
@@ -40,5 +33,27 @@ function fun_open(category_id)
 		prods[i].style.display = 'block';
 		prods[i].style.width = '200px';
 	}
-	sub_cat.style['width'] = 'auto';
+	sub_cat.style['width'] = 'auto';*/
+	let items = [];
+	data.products.map((item) => {
+		if (item.category_id == category_id){
+			items.push(item);
+		}
+	})
+	add_product_to_list(items);
+	// console.log(items);
+}
+
+function add_product_to_list(products){
+	let items = "";
+	products.map((item) =>{
+		items+='<div class="item">'+
+		'<div class="information">'+
+		'<div class="name">Назва продукту: '+item.title+'</div>'+
+		'<div class="price">Ціна: '+item.price+' грн</div>';
+		if (item.old_price != 0 && item.old_price != "")
+			items+='<div class="old-price">Стара ціна: '+item.old_price+' грн</div>';
+		items+='</div><img src="'+item.img+'" height="150px" width="200px"></div>';
+	})
+	document.querySelector(".content-container").innerHTML = items;
 }
