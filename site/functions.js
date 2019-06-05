@@ -53,7 +53,7 @@ function add_product_to_list(products){
 		'<div class="price">Ціна: '+item.price+' грн</div>';
 		if (item.old_price != 0 && item.old_price != "")
 			items+='<div class="old-price">Стара ціна: '+item.old_price+' грн</div>';
-		items+='</div><img src="'+item.img+'" height="150px" width="200px"></div>';
+		items+='</div><img src="'+item.img+'" width="150px" height="150px"></div>';
 	})
 	document.querySelector(".content-container").innerHTML = items;
 }

@@ -39,14 +39,14 @@ aside{
 	flex-basis: 300px;
 	flex-grow: 1;
 	align-items: center;
-	background: green;
+	background: #fff;
 }
 
 header {
 background:green;
 }
 
-.category {
+/*.category {
 padding:1ex;
 background:#FFC890;
 height:auto;
@@ -54,7 +54,7 @@ margin:0;
 display:flex;
 flex-direction:row;
 justify-content:space-around;
-}
+}*/
 
 .sub-category, .sub-category button{
 	display: flex;
@@ -62,24 +62,38 @@ justify-content:space-around;
 
 .sub-category {
 	flex-direction: column;
-	width: 200px;
-	height:700px;
+	align-items: center;
+	height:auto;
 }
 
 .sub-category button {
-color:#fff;
-width: 200px;
-margin: 1ex;
+--color: #000;
+--hover: #8cf;
+width: 100%;
 padding:1em;
 font-size: 1em;
 font-weight: bold;
-background-image:url('img/button 2.0.png');
-background-repeat:round;
-background-size:cover;
 text-align: right;
 }
 
-.category button, .sub-category-name{
+.sub-category button:hover {
+background: #eee;
+}
+.sub-category button:focus {
+	color: #fff;
+	 box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+  	/*-webkit-transform: translateY(-0.25em);
+          transform: translateY(-0.25em);*/
+     background: #4ae;
+}
+
+button {
+  color: var(--color);
+  -webkit-transition: 0.25s;
+  transition: 0.25s;
+}
+
+/*.category button, .sub-category-name{
 color:#fff;
 margin:0;
 font-weight:700;
@@ -89,7 +103,7 @@ background-repeat:round;
 background-size:auto;
 padding:1em 3em;
 text-align:center;
-}
+}*/
 
 .map-container {
 	float: right;
@@ -100,12 +114,14 @@ display:flex;
 flex-direction:column
 }
 
-.choose-content-container {
+.choose-container {
 display:flex;
-flex-direction:row
+justify-content: space-around;
+flex-direction:row;
+align-items: center;
 }
 
-.choose-content-container>div {
+.choose-container button {
 width:50%;
 height:50px;
 display:flex;
@@ -132,17 +148,20 @@ align-items:center
 	align-items: center;
 	border-radius: 3px;
 	margin-top: 7px;
-	box-shadow: 3px 3px 2px black; 
-}
-
-.item .information{
-	width: auto;
+	box-shadow: 0 0.5em 0.5em -0.4em  #8cf;
 	padding: 7px;
 }
+
+.item img{
+	margin: 5px;
+	border-radius: 100%;
+	border: solid 3px #4ae;
+}
+
 footer {
 padding:2px;
 font-size:80%;
 background:grey;
 color:#fff;
-text-align:center
+text-align:center;
 }
